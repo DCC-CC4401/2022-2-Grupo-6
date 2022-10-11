@@ -8,18 +8,20 @@
   
 </head>
 
-<body>
-<main>
+<body class="text-center">
 
+<main class="form-signin w-100 m-auto">
+   <form>
    <h1 class="visually-hidden">Haroo, Happi Warudo </h1>
    <div class="px-5 py-5 my-5 text-center">
    <!-- comentario: aqui abajo se puede agregar una foto para el logo -->
-      <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+     
       <!-- comentario: agregar nombre de la pagina -->
       <h1 class="display-5 fw-bold">Nombre de la pagina</h1>
       <div class="col-lg-6 mx-auto">
          <!-- comentario: agregar descripcion abajito -->
-         <p class="lead mb-4">Agregar descripcion</p>
+         <p class="lead mb-4">¡Bienvenido a nuestra comunidad! Aquí podrás compartir tutorías que quieras impartir y buscar alguna que te interese
+         </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
              {% if user.is_authenticated %}
              <a href="{% url 'logout' %}">Cerrar sesión </a>
@@ -30,6 +32,7 @@
             </div>
       </div>
    </div>
+   </form>
 
 
 </main> 
