@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from app_inicial.models import User
 from django.contrib.auth import authenticate, login,logout
 
+
 def index(request):
     return render(request,"registration/index.html")
 
@@ -21,7 +22,7 @@ def register_user(request):
         user = User.objects.create_user(username=nombre, password=contrasena, email=mail)
 
         #Redireccionar la página /tareas
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/registration/home')
 
 def login_user(request):
     if request.method == 'GET':
@@ -32,10 +33,18 @@ def login_user(request):
         usuario = authenticate(username=username,password=contrasena)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/registration/home')
         else:
             return HttpResponseRedirect('/accounts/register')
 
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def home(request):
+    return render(request,"registration/home.html")
+
+
+def profile(request):
+    return render(request,"registration/profile.html")
