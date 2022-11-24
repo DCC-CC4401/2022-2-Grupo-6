@@ -18,22 +18,35 @@ def register_user(request):
         contrasena = request.POST['contrasena']
         mail = request.POST['correo']
 
+        # chequeamos si no está en la lista
+        query_1 = User.objects.filter(username=nombre)
+        query_2 = User.objects.filter(email=mail)
+        bad = False
+        print(request)
+        if len(query_1) > 0:
+            bad = True
+        if len(query_2) > 0:
+            bad = True
+        if bad:
+            return render(request, "registration/register_user.html")
         #Crear el nuevo usuario
         user = User.objects.create_user(username=nombre, password=contrasena, email=mail)
 
         #Redireccionar la página /tareas
-        return HttpResponseRedirect('/registration/home')
+        return HttpResponseRedirect('/accounts/home')
 
 def login_user(request):
     if request.method == 'GET':
         return render(request,"registration/login.html")  
     if request.method == 'POST':
-        username = request.POST['nombre']
+        email = request.POST['email']
         contrasena = request.POST['contrasena']
-        usuario = authenticate(username=username,password=contrasena)
+        query = User.objects.filter(email=email)
+        # supone que solo hay uno en la base de datos, sino hay un bug
+        usuario = query[0]
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/registration/home')
+            return HttpResponseRedirect('/accounts/home')
         else:
             return HttpResponseRedirect('/accounts/register')
 
