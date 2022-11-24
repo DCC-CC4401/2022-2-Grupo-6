@@ -43,7 +43,8 @@ def login_user(request):
         contrasena = request.POST['contrasena']
         query = User.objects.filter(email=email)
         # supone que solo hay uno en la base de datos, sino hay un bug
-        usuario = query[0]
+        username = query[0].username
+        usuario = authenticate(username=username,password=contrasena)
         if usuario is not None:
             login(request,usuario)
             return HttpResponseRedirect('/accounts/home')
