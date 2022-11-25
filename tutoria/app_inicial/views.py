@@ -48,3 +48,20 @@ def home(request):
 
 def profile(request):
     return render(request,"registration/profile.html")
+
+def publicaciones(request):
+    # tenemos que hacer la funcion para ingresar los datos a la base de datos y para mostrarlos
+    if request.method == 'GET':
+        return render(request,"registration/publicaciones.html")
+    
+    if request.method == 'POST':
+        fecha = request.POST['fecha']
+        tutor = request.POST['tutor']
+        subject = request.POST['subject']
+        schedule = request.POST['schedule']
+        cost = request.POST['cost']
+        descripcion = request.POST['descripcion']
+        rating = request.POST['rating']
+        
+        publicacion = Publicacion.objects.create(descripcion=descripcion, fecha=fecha, tutor=tutor, subject=subject, schedule=schedule, cost=cost, rating=rating)
+        return HttpResponseRedirect('/registration/publicaciones')
