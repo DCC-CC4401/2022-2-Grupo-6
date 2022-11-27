@@ -47,4 +47,9 @@ def home(request):
 
 
 def profile(request):
+    
     return render(request,"registration/profile.html")
+
+
+def edit_profile(request):
+    return render(request, "registration/edit_profile.html")
