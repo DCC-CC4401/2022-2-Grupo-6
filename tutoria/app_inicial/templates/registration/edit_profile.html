@@ -108,7 +108,7 @@
                                                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                                                    alt="Avatar" class="img-fluid my-5" style="width: 150px;" />
                                                    
-                                                   <a class="btn btn-success" href="{% url 'edit_profile' %}" role="button">Editar Perfil</a>
+                                                   <a class="btn btn-success" href="{% url 'profile' %}" role="button">Guardar Cambios</a>
                                                </div>
                                                <div class="col-md-8">
                                                  <div class="card-body">
@@ -119,7 +119,7 @@
 
                                                     <div class="col-6 mb-3">
                                                       <h6>Nombre</h6>
-                                                      <p class="text-muted"> {{user}} </p>
+                                                      <div class="inputs"> <input class="form-control" type="text" placeholder="Nombre"> </div>
                                                     </div>
 
                                                     
@@ -134,7 +134,7 @@
                                                    <div class="row pt-1">   
                                                      <div class="col-6 mb-3">
                                                        <h6>Teléfono</h6>
-                                                       <p class="text-muted"> - </p>
+                                                       <div class="inputs"> <input class="form-control" type="text" placeholder="Teléfono"> </div>
                                                      </div>
                                                    </div>
 
@@ -142,7 +142,7 @@
                                                    <hr class="mt-0 mb-4">
                                                    <div class="row pt-1">
                                                      <div class="col-6 mb-3">
-                                                       <p class="text-muted">Holaaa</p>
+                                                        <div class="inputs"> <input class="form-control" type="text" placeholder="Descripción"> </div>
                                                      </div>
                                                     
                                                    </div>
