@@ -1,4 +1,4 @@
-{% load static %}
+    {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +10,7 @@
 <body>
     <!-- vamos a crear la pagina de visualizacion de publicaciones -->
     <!-- copiamos el nav bar-->
-    <nav class="navbar fixed-top navbar-light bg-light justify-content-between">
+    <nav class="navbar navbar-light bg-light justify-content-between">
       
   
         <div class="container">
@@ -68,33 +68,32 @@
        </p>
     
     </nav>
-    <!--  abrimos seccion form para crear las publicaciones -->
+    <!--  abrimos seccion form para crear las publicaciones con titulo, materia, horario, costo, descripcion -->
     <form class="p-4 p-md-5 border rounded-3 bg-light">
     <h1>Crear publicacion</h1>
-    <div class="form-group">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="materia">Materia</label>
-            <input type="text" class="form-control" id=materia name="materia" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="horario">Horario</label>
-            <input type="text" class="form-control" id=horario name="horario" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="Descripcion">Descripcion</label>
-            <input type="text" class="form-control" id=descripcion name="descripcion" required>
-        </div>
-        
-        <div class="form-group">
-            <a href="{% url 'publicaciones' %}">  
-            <button type="button" class="btn btn-success">Publicar</button> 
-            </a>  
-        </div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Titulo</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Titulo">
+                <br>
+                <label for="subject">Materia</label>
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Materia">
+                <br>
+                <label for="schedule">Horario</label>
+                <input type="text" class="form-control" id="schedule" name="schedule" placeholder="Horario">
+                <br>
+                <label for="cost">Costo</label>
+                <input type="text" class="form-control" id="cost" name="cost" placeholder="Costo">
+                <br>
+                <label for="description">Descripcion</label>
+                <input type="text" class="form-control" id="description" name="description" placeholder="Descripcion">
+                <br>
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
 
+        </form>
     </div>
     
 

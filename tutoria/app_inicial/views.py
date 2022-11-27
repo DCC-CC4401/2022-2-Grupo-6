@@ -52,7 +52,7 @@ def profile(request):
 def publicaciones(request):
     # tenemos que hacer la funcion para ingresar los datos a la base de datos y para mostrarlos
     if request.method == 'GET':
-        return render(request,"registration/publicaciones.html")
+        return render(request,"registration/create_publicaciones.html")
     
     if request.method == 'POST':
         fecha = request.POST['fecha']
@@ -64,4 +64,4 @@ def publicaciones(request):
         rating = request.POST['rating']
         
         publicacion = Publicacion.objects.create(descripcion=descripcion, fecha=fecha, tutor=tutor, subject=subject, schedule=schedule, cost=cost, rating=rating)
-        return HttpResponseRedirect('/registration/publicaciones')
+        return HttpResponseRedirect('/registration/create_publicaciones')
