@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from app_inicial.models import User
 from django.contrib.auth import authenticate, login,logout
-
+from django.contrib import messages
 
 def index(request):
     return render(request,"registration/index.html")
@@ -28,10 +28,11 @@ def register_user(request):
         if len(query_2) > 0:
             bad = True
         if bad:
+
             return render(request, "registration/register_user.html")
         #Crear el nuevo usuario
         user = User.objects.create_user(username=nombre, password=contrasena, email=mail)
-
+        messages.success(request,"Tu cuenta a sido creada coccn exito")
         #Redireccionar la página /tareas
         return HttpResponseRedirect('/accounts/home')
 
@@ -41,6 +42,7 @@ def login_user(request):
     if request.method == 'POST':
         email = request.POST['email']
         contrasena = request.POST['contrasena']
+
         query = User.objects.filter(email=email)
         # supone que solo hay uno en la base de datos, sino hay un bug
         username = query[0].username
@@ -49,7 +51,8 @@ def login_user(request):
             login(request,usuario)
             return HttpResponseRedirect('/accounts/home')
         else:
-            return HttpResponseRedirect('/accounts/register')
+           
+            return HttpResponseRedirect('/accounts/login')
 
 def logout_user(request):
     logout(request)
@@ -61,4 +64,7 @@ def home(request):
 
 
 def profile(request):
-    return render(request,"registration/profile.html")
+    context = {
+        'user': request.user
+    }
+    return render(request,"registration/profile.html",context)
