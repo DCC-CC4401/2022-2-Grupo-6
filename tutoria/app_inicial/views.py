@@ -68,4 +68,4 @@ def publicaciones(request):
         publicacion = Publicacion.objects.create(descripcion=descripcion, titulo=titulo, subject=subject, schedule=schedule, cost=cost, owner=request.user)
         publicacion.save()
         messages.success(request,'buenas noches tengo caña afasd')
-        return HttpResponseRedirect('/accounts/home.html')
+        return HttpResponseRedirect('registration/home.html')
