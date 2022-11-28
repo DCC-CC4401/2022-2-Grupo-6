@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include,reverse_lazy
 from app_inicial.views import index
+import app_inicial.models
 from django.views.generic import RedirectView
 
 urlpatterns = [
