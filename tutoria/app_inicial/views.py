@@ -66,8 +66,7 @@ def publicaciones(request):
         schedule = request.POST['schedule']
         cost = request.POST['cost']
         descripcion = request.POST['descripcion']
-        
-        publicacion = Publicacion.objects.create(descripcion=descripcion, titulo=titulo, subject=subject, schedule=schedule, cost=cost, owner=request.user)
+        publicacion = Publicacion.objects.create(titulo=titulo,subject=subject,schedule=schedule,cost=cost,descripcion=descripcion,usuario=request.user)
         publicacion.save()
-        messages.success(request,'buenas noches tengo caña afasd')
-        return HttpResponseRedirect('registration/home.html')
+        
+        return HttpResponseRedirect('/registration/home')
