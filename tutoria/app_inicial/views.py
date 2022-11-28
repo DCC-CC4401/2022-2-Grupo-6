@@ -114,7 +114,7 @@ def oferta_detail(request, pk):
 def resumen(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
-            ofert = Oferta.objects.filter(p_user=request.user) 
+            ofert = Oferta.objects.filter() 
             return render(request, 'registration/home.html', {'ofert' :ofert})
     else:
         return redirect('login')
