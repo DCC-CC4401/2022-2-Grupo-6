@@ -68,3 +68,12 @@ def profile(request):
         'user': request.user
     }
     return render(request,"registration/profile.html",context)
+
+def edit_profile(request):
+    context = {
+        'user': request.user
+    }
+    return render(request,"registration/edit_profile.html",context)
+
+    
+    
