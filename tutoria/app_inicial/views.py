@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from app_inicial.models import User
 from django.contrib.auth import authenticate, login,logout
+from django.contrib import messages
 
 def index(request):
     return render(request,"registration/index.html")
@@ -17,25 +18,53 @@ def register_user(request):
         contrasena = request.POST['contrasena']
         mail = request.POST['correo']
 
+        # chequeamos si no está en la lista
+        query_1 = User.objects.filter(username=nombre)
+        query_2 = User.objects.filter(email=mail)
+        bad = False
+        print(request)
+        if len(query_1) > 0:
+            bad = True
+        if len(query_2) > 0:
+            bad = True
+        if bad:
+
+            return render(request, "registration/register_user.html")
         #Crear el nuevo usuario
         user = User.objects.create_user(username=nombre, password=contrasena, email=mail)
-
+        messages.success(request,"Tu cuenta a sido creada coccn exito")
         #Redireccionar la página /tareas
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/accounts/home')
 
 def login_user(request):
     if request.method == 'GET':
         return render(request,"registration/login.html")  
     if request.method == 'POST':
-        username = request.POST['nombre']
+        email = request.POST['email']
         contrasena = request.POST['contrasena']
+
+        query = User.objects.filter(email=email)
+        # supone que solo hay uno en la base de datos, sino hay un bug
+        username = query[0].username
         usuario = authenticate(username=username,password=contrasena)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/accounts/home')
         else:
-            return HttpResponseRedirect('/accounts/register')
+           
+            return HttpResponseRedirect('/accounts/login')
 
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def home(request):
+    return render(request,"registration/home.html")
+
+
+def profile(request):
+    context = {
+        'user': request.user
+    }
+    return render(request,"registration/profile.html",context)

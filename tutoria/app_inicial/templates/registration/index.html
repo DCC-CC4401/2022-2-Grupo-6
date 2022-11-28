@@ -1,19 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-   <title>Inicio</title>
+   <link rel="stylesheet" href="{% static 'app_inicial/style.css' %}">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  
 </head>
-<body>
-<h1> Haroo, Happi Warudo </h1>
 
-<hr>
-{% if user.is_authenticated %}
-   
-   <a href="{% url 'logout' %}">Cerrar sesión </a>
-{% else %}
-   
-   <a href="{% url 'register_user' %}">Registrarse</a>
-   <a href="{% url 'login' %}">Iniciar Sesión</a>
-{% endif %}
-<hr>
+<body class="text-center">
+
+<main class="form-signin w-100 m-auto">
+   <form>
+   <h1 class="visually-hidden">Haroo, Happi Warudo </h1>
+   <div class="px-5 py-5 my-5 text-center">
+   <!-- comentario: aqui abajo se puede agregar una foto para el logo -->
+     
+      <!-- comentario: agregar nombre de la pagina -->
+
+
+      <div class="fs-2 mb-3 ">
+         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-chevron-bar-contract" viewBox="0 0 16 16">
+           <path fill-rule="evenodd" d="M3.646 14.854a.5.5 0 0 0 .708 0L8 11.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zm0-13.708a.5.5 0 0 1 .708 0L8 4.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zM1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8z"/>
+         </svg>
+     </div>
+
+      <h1 class="display-5 fw-bold">U-Tutores</h1>
+      <div class="col-lg-6 mx-auto">
+         <!-- comentario: agregar descripcion abajito -->
+         <p class="lead mb-4">¡Bienvenido a nuestra comunidad! Aquí podrás compartir tutorías que quieras impartir y buscar alguna que te interese
+         </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+             {% if user.is_authenticated %}
+             <a href="{% url 'logout' %}">Cerrar sesión </a>
+             {% else %}
+            <a class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'register_user' %}" role="button">Registrarse</a>
+            <a class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'login' %}" role="button">Iniciar Sesión</a>  
+            {% endif %}
+            </div>
+      </div>
+   </div>
+   </form>
+
+
+</main> 
+</body>   
