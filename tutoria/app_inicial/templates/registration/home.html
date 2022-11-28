@@ -74,17 +74,19 @@
   
         </ul>
       </div>
-     </div>
     </nav>
 
   <!-- End of Navbar -->
   <!-- boton de creacion de post's -->
   <!-- Start of post's-->
   <div class="container">
-    <div>
-      <h2>hola</h2>
-      <a href="hola.cl">holaaaaaaaaa</a>
+    <div class="form-group">
+      <a href="{% url 'create_publicaciones' %}">  
+      <button type="button" class="btn btn-success">Crear Publicacion </button> 
+      </a>  
     </div>
+  <br>
+
 
 
       <h2>Historial</h2>
@@ -92,24 +94,21 @@
           <table class="table table-striped">
               <thead>
                   <tr>
-                      <th scope="col">Fecha</th>
                       <th scope="col">Tutor</th>
                       <th scope="col">Materia</th>
                       <th scope="col">Horario</th>
                       <th scope="col">Costo</th>
-                      <th scope="col">Calificación</th>
                       <th scope="col">Descripcion</th>
                   </tr>
               </thead>
               <tbody>
                   {% for publicacion in publicaciones %}
                   <tr>
-                      <td>{{tutor.date}}</td>
                       <td>{{tutor.tutor}}</td>
                       <td>{{tutor.subject}}</td>
                       <td>{{tutor.schedule}}</td>
                       <td>{{tutor.cost}}</td>
-                      <td>{{tutor.rating}}</td>
+                      <td>{{tutor.descripcion}}</td>
                   </tr>
                   {% endfor %}
               </tbody>

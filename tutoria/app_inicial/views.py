@@ -2,7 +2,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from app_inicial.models import User
+from app_inicial.models import Publicacion
 from django.contrib.auth import authenticate, login,logout
+from django.contrib import messages
 
 
 def index(request):
@@ -55,13 +57,14 @@ def publicaciones(request):
         return render(request,"registration/create_publicaciones.html")
     
     if request.method == 'POST':
-        fecha = request.POST['fecha']
-        tutor = request.POST['tutor']
+        
+        titulo = request.POST['title']
         subject = request.POST['subject']
         schedule = request.POST['schedule']
         cost = request.POST['cost']
         descripcion = request.POST['descripcion']
-        rating = request.POST['rating']
         
-        publicacion = Publicacion.objects.create(descripcion=descripcion, fecha=fecha, tutor=tutor, subject=subject, schedule=schedule, cost=cost, rating=rating)
-        return HttpResponseRedirect('/registration/create_publicaciones')
+        publicacion = Publicacion.objects.create(descripcion=descripcion, titulo=titulo, subject=subject, schedule=schedule, cost=cost, owner=request.user)
+        publicacion.save()
+        messages.success(request,'buenas noches tengo caña afasd')
+        return HttpResponseRedirect('registration/home.html')
