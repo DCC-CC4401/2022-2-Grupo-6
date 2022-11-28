@@ -73,8 +73,8 @@
     <h1>Crear Publicacion</h1>
     <div class="container">
         <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
+          <div class="form-group">
+                {% csrf_token %}
                 <label for="title">Titulo</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Titulo">
                 <br>

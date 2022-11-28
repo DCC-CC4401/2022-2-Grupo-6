@@ -95,23 +95,28 @@
               <thead>
                   <tr>
                       <th scope="col">Tutor</th>
+                      <th scope="col">Titulo</th>
                       <th scope="col">Materia</th>
                       <th scope="col">Horario</th>
                       <th scope="col">Costo</th>
                       <th scope="col">Descripcion</th>
                   </tr>
               </thead>
+              <!-- we need to show the publicaciones database -->
+              
               <tbody>
+                {% block content %}
                   {% for publicacion in publicaciones %}
                   <tr>
-                      <td>{{tutor.tutor}}</td>
-                      <td>{{tutor.subject}}</td>
-                      <td>{{tutor.schedule}}</td>
-                      <td>{{tutor.cost}}</td>
-                      <td>{{tutor.descripcion}}</td>
+                      <td>{{publicacion.owner}}</td>
+                      <td>{{publicacion.titulo}}</td>
+                      <td>{{publicacion.materia}}</td>
+                      <td>{{publicacion.horario}}</td>
+                      <td>{{publicacion.costo}}</td>
+                      <td>{{publicacion.descripcion}}</td>
                   </tr>
                   {% endfor %}
-              </tbody>
+                {% endblock %}
           </table>
       </p>
   </div>

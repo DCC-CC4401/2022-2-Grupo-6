@@ -54,9 +54,10 @@ def profile(request):
 def publicaciones(request):
     # tenemos que hacer la funcion para ingresar los datos a la base de datos y para mostrarlos
     if request.method == 'GET':
-        return render(request,"registration/create_publicaciones.html")
+        publicaciones = Publicacion.objects.all()
+        return render(request,"registration/home.html",{'publicaciones':publicaciones})
     
-    if request.method == 'POST':
+    elif request.method == 'POST':
         
         titulo = request.POST['title']
         subject = request.POST['subject']
@@ -67,4 +68,4 @@ def publicaciones(request):
         publicacion = Publicacion.objects.create(descripcion=descripcion, titulo=titulo, subject=subject, schedule=schedule, cost=cost, owner=request.user)
         publicacion.save()
         messages.success(request,'buenas noches tengo caña afasd')
-        return HttpResponseRedirect('/accounts/home')
+        return HttpResponseRedirect('/accounts/home.html')
