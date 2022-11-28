@@ -45,17 +45,19 @@ def logout_user(request):
 
 
 def home(request):
-    return render(request,"registration/home.html")
+    publicaciones = Publicacion.objects.all()
+    return render(request,"registration/home.html",{'publicaciones':publicaciones})
 
 
 def profile(request):
     return render(request,"registration/profile.html")
 
+
+
 def publicaciones(request):
     # tenemos que hacer la funcion para ingresar los datos a la base de datos y para mostrarlos
     if request.method == 'GET':
-        publicaciones = Publicacion.objects.all()
-        return render(request,"registration/home.html",{'publicaciones':publicaciones})
+        return render(request,"registration/create_publicaciones.html")
     
     elif request.method == 'POST':
         
