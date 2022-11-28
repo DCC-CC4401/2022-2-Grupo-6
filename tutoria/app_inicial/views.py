@@ -1,12 +1,15 @@
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from app_inicial.models import User
+from app_inicial.models import User, Oferta
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
+from .forms import CrearOferta
 
 def index(request):
-    return render(request,"registration/index.html")
+        return render(request,"registration/index.html")
+
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
@@ -55,16 +58,63 @@ def login_user(request):
             return HttpResponseRedirect('/accounts/login')
 
 def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect('/')
-
+    if request.user.is_authenticated:
+        logout(request)
+        return HttpResponseRedirect('/')
+    else:
+        return redirect('index')
 
 def home(request):
-    return render(request,"registration/home.html")
+    if request.user.is_authenticated:
+        return render(request,"registration/home.html")
+
+    else:
+        return redirect('login')
 
 
 def profile(request):
-    context = {
-        'user': request.user
-    }
-    return render(request,"registration/profile.html",context)
+    if request.user.is_authenticated:
+        context = {
+            'user': request.user
+        }
+        return render(request,"registration/profile.html",context)
+    else:
+        return redirect('login')
+
+
+
+def crear_oferta(request):
+     if request.user.is_authenticated:
+        form = CrearOferta()
+        if request.method == "POST":
+            form = CrearOferta(request.POST)
+            if form.is_valid():
+                oferta = form.save(commit=False)
+                oferta.p_user = request.user
+                oferta.save()
+                return redirect('ofertas_detail', pk=oferta.pk)
+        else:
+            form = CrearOferta()
+        return render(request, 'registration/ofertaForm.html', {'form': form})
+     else:
+        return redirect('login')
+    
+
+def oferta_detail(request, pk):
+    
+    if request.user.is_authenticated:
+        oferta_a = get_object_or_404(Oferta, pk=pk)
+        return render(request, 'registration/oferta_list.html', {'oferta_a': oferta_a})
+    else:
+        return redirect('login')
+
+
+
+
+def resumen(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            ofert = Oferta.objects.filter() 
+            return render(request, 'registration/home.html', {'ofert' :ofert})
+    else:
+        return redirect('login')
